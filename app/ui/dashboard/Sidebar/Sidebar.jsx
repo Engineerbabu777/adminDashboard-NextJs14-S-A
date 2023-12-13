@@ -1,4 +1,5 @@
 import MenuLink from './menuLink/MenuLink'
+import Image from 'next/image';
 import styles from './sidebar.module.css'
 import {
   MdDashboard,
@@ -80,6 +81,20 @@ export default function Sidebar ({}) {
   return (
     <>
       <div className={styles.container}>
+
+      <div className={styles.user}>
+        <Image
+          className={styles.userImage}
+          src={"" || "/noavatar.png"}
+          alt=""
+          width="50"
+          height="50"
+        />
+        <div className={styles.userDetail}>
+          <span className={styles.username}>Turkish Babu</span>
+          <span className={styles.userTitle}>Administrator</span>
+        </div>
+      </div>
         <ul className={styles.list}>
           {menuItems.map(cat => (
             <li key={cat.title}>
