@@ -8,9 +8,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 
-export default function Page ({}) {
-  const users = []
+export default async function Page ({searchParams}) {
 
+
+    const q = searchParams?.q || "";
+    const page = searchParams?.page || 1;
+    const { count, users } = await fetchUsers(q, page);
+  
   return (
     <>
       <div className={styles.container}>
@@ -52,7 +56,7 @@ export default function Page ({}) {
                 <td>{user?.isActive ? 'active' : 'passive'}</td>
                 <td>
                   <div className={styles.buttons}>
-                    <Link href={`/dashboard/users/abc`}>
+                    <Link href={`/dashboard/users/${user.id}`}>
                       <button className={`${styles.button} ${styles.view}`}>
                         View
                       </button>
@@ -69,7 +73,7 @@ export default function Page ({}) {
             ))}
           </tbody>
         </table>
-        <Pagination count={1} />
+        <Pagination count={count} />
       </div>
     </>
   )
